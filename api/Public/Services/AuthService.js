@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 import { JWT_SECRET } from '../../src/config/envKeys';
 
-class LoginAuthService{
+class AuthService{
 
 	/* 
 	 * md5 -> password //register
@@ -19,13 +19,13 @@ class LoginAuthService{
 			const isEmailTaken = await db.Users.findOne({where: { email: body.email }});			
 			if (isEmailTaken) return {
 				type: false,
-				message: 'Bu email daha önce kayıt edilmiş.'
+				message: 'Email is already taken'
 			};
 
 			const isUsernameTaken = await db.Users.findOne({where: { username: body.username }});
 			if (isUsernameTaken) return {
 				type: false,
-				message: 'Bu kullanıcı daha önce kayıt edilmiş.'
+				message: 'Username is already taken'
 			};
 
 			const result = await db.Users.create({
@@ -34,19 +34,19 @@ class LoginAuthService{
 				password,
 				name: body.name,
 				surname: body.surname,
-				isDeleted: 0
+				isDeleted: 0 //default value
 			});
 
-			if (result.Length === 0) {
+			if (!result) {
 				return {
 					type: false,
-					message: 'Kullanıcı oluşturulmadı.'
+					message: 'user not created'
 				};
 			}
 
 			return {
 				type: true,
-				message: 'Kullanıcı oluşturuldu.'
+				message: 'User created'
 			};
 		}
 		catch (error) {
@@ -55,18 +55,12 @@ class LoginAuthService{
 	}
 
 	static async login(body){
-		const user = await db.Users.findOne({where: {email: body.email }});
+		const user = await db.Users.findOne({where: {email: body.email, password: md5(body.password) }});
 		if (!user) return {
 			type: false,
-			message: 'Böyle bir kullanıcı yok.'
+			message: 'Email or password is wrong. Invalid login credentials'
 		};
-
-		const isPasswordTrue = user.password === md5(body.password) ? true : false;
-		if (!isPasswordTrue) return {
-			type: false,
-			message: 'Şifre yanlış.'
-		};
-		
+				
 		const token = jwt.sign(
 			{
 				userId: user.id,
@@ -74,7 +68,7 @@ class LoginAuthService{
 				email: user.email
 			},
 			JWT_SECRET,
-			{ expiresIn: '24 hours' }
+			{ expiresIn: 86400 }
 		);
 
 		return {
@@ -87,4 +81,4 @@ class LoginAuthService{
 
 }
 
-export default LoginAuthService;
+export default AuthService;

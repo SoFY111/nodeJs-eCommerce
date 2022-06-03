@@ -4,7 +4,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { success } from 'consola';
 
-import publicAuthRoutes from './Public/Routes/LoginAuthRoute';
+import publicAuthRoutes from './Public/Routes/AuthRoute';
+import readPublicRoutes from './Public/index';
 
 const PORT = process.env.PORT;
 const app = express();
@@ -16,6 +17,7 @@ app.get('/health', (req, res) => {
 	res.send('server is running');
 });
 
+app.use('/pc/', readPublicRoutes);
 app.use('/public/', publicAuthRoutes);
 
 app.listen(PORT, () => {
