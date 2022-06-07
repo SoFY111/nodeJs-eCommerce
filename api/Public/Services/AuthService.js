@@ -6,11 +6,6 @@ import { JWT_SECRET } from '../../src/config/envKeys';
 
 class AuthService{
 
-	/* 
-	 * md5 -> password //register
-	 * jwt -> günlük token //login
-	 */
-
 	static async register(body){
 		try {
 
@@ -63,7 +58,7 @@ class AuthService{
 				
 		const token = jwt.sign(
 			{
-				userId: user.id,
+				user_id: user.id,
 				username: user.username,
 				email: user.email
 			},

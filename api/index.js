@@ -4,7 +4,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { success } from 'consola';
 
-import readPublicRoutes from './Public/index';
+import publicRoutes from './Public/index';
+import privateRoutes from './Private/index';
 
 const PORT = process.env.PORT;
 const app = express();
@@ -19,7 +20,8 @@ app.get('/health', (req, res) => {
 	res.send('server is running');
 });
 
-app.use('/public', readPublicRoutes);
+app.use('/public', publicRoutes);
+app.use('/private', privateRoutes);
 
 swaggerGenerator(swaggerOptions);
 

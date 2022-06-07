@@ -1,8 +1,6 @@
 import express from 'express';
 import fs from 'fs';
 
-//import AuthRoutes from './Routes';
-
 const app = express();
 
 //__dirname
@@ -11,7 +9,7 @@ fs.readdir('./api/Public/Routes', (err, files) => {
   
 	for (let file of files) {
 		const routeName = file.slice(0, file.length - 8);
-		const routeNameLower = routeName.toLocaleLowerCase();
+		const routeNameLower = routeName.toLowerCase();
 
 		let routeFile = require(`./Routes/${routeName}Route`);
 		app.use(`/${routeNameLower}`, routeFile);
