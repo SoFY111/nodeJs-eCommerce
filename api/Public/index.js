@@ -14,12 +14,12 @@ fs.readdir('./api/Public/Routes', (err, files) => {
 	for (let file of files) {
 		const routeName = file.slice(0, file.length - 8);
 		const routeNameLower = routeName.toLocaleLowerCase();
-
+		
 		console.log('***************************');
 		console.log('fileName: ', file);
 		console.log('routeName:', routeName);
 		console.log('routeNameLower:', routeNameLower);
-		console.log('***************************');
+		console.log('***************************'); 
 
 		let routeFile = require(`./Routes/${routeName}Route`);
 		app.use(`/${routeNameLower}`, routeFile);

@@ -8,8 +8,9 @@ const app = express();
  * /login --> login
  */
 
-app.get('/', AuthController.home);
-app.post('/users', AuthController.register);
-app.post('/users/login', AuthController.login);
+app.post('/', AuthController.register);
+app.post('/login', AuthController.login);
+
+app.get('/health', AuthController.health);
 
 module.exports = app;

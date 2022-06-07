@@ -2,7 +2,7 @@ import AuthService from '../Services/AuthService';
 
 class AuthController{
 
-	static async home(req, res){
+	static async health(req, res){
 		res.json({type: true, message: 'successful'});
 	}
 
