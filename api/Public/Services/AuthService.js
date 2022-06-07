@@ -19,7 +19,7 @@ class AuthService{
 			const isEmailTaken = await db.Users.findOne({where: { email: body.email }});			
 			if (isEmailTaken) return {
 				type: false,
-				message: 'Email is already taken'
+				message: 'Email is already taken.'
 			};
 
 			const isUsernameTaken = await db.Users.findOne({where: { username: body.username }});
@@ -34,7 +34,7 @@ class AuthService{
 				password,
 				name: body.name,
 				surname: body.surname,
-				isDeleted: 0 //default value
+				isDeleted: 0
 			});
 
 			if (!result) {

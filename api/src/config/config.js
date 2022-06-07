@@ -1,6 +1,5 @@
-
-import {DB_HOST, DB_USERNAME, DB_PASSWORD} from './envKeys';
-
+/* import {DB_HOST, DB_USERNAME, DB_PASSWORD} from './envKeys'; */
+const { DB_HOST, DB_USERNAME, DB_PASSWORD } = require('./envKeys');
 module.exports = {
 	development: {
 		username: DB_USERNAME,
@@ -24,3 +23,4 @@ module.exports = {
 		dialect: 'postgres'
 	}
 };
+

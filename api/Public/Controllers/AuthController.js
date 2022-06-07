@@ -1,3 +1,12 @@
+/**
+ * @typedef AuthReq
+ * @property {string} email
+ * @property {string} username
+ * @property {string} name
+ * @property {string} surname
+ * @property {string} password
+ */
+
 import AuthService from '../Services/AuthService';
 
 class AuthController{
@@ -11,10 +20,10 @@ class AuthController{
 			const result = await AuthService.register(req.body);
 
 			if (result.type) res.json({type: true, message: result.message});
-			res.json({type: false, message: result.message});
+			else res.json({type: false, message: result.message});
 		}
 		catch (error) {
-			res.json({type: false, message: error});
+			res.json({type: false, message: error.message});
 		}
 	}
 
@@ -23,10 +32,10 @@ class AuthController{
 			const result = await AuthService.login(req.body);
 
 			if (result.type) res.json({type: true, message: result.message, data: {token: result.token}});
-			res.json({type: false, message: result.message});
+			else res.json({type: false, message: result.message});
 		}
 		catch (error) {
-			res.json({type: false, message: error});
+			res.json({type: false, message: error.message});
 		}
 	}
 
