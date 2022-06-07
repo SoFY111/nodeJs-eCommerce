@@ -6,6 +6,11 @@
  * @property {string} surname
  * @property {string} password
  */
+/**
+ * @typedef AuthReqLogin
+ * @property {string} email
+ * @property {string} password
+ */
 
 import AuthService from '../Services/AuthService';
 
@@ -14,7 +19,15 @@ class AuthController{
 	static async health(req, res){
 		res.json({type: true, message: 'successful'});
 	}
-
+	
+	/** 
+	 * @route POST /public/auth/
+	 * @group Auth
+	 * @summary Create new user
+	 * @param {AuthReq.model} body.body
+	 * @returns {object} 200 - Success message
+	 * @returns {Error} default - Unexpected error
+	 */
 	static async register(req, res){
 		try {
 			const result = await AuthService.register(req.body);
@@ -27,6 +40,14 @@ class AuthController{
 		}
 	}
 
+	/**
+	 * @route POST /public/auth/login
+	 * @group Auth
+	 * @summary Login
+	 * @param { AuthReqLogin.model } body.body
+	 * @returns {object} 200 - Success message
+	 * @returns {Error} default - Unexpected error
+	 */
 	static async login(req, res){
 		try {
 			const result = await AuthService.login(req.body);

@@ -1,6 +1,6 @@
 module.exports = {
-	options: {
-		definition: {
+	swaggerOptions: {
+		swaggerDefinition: {
 			info: {
 				description: 'eCommerce',
 				title: 'eCommerce',
@@ -16,8 +16,7 @@ module.exports = {
 		},
 		basedir: __dirname, // app absolute path
 		files: [
-			'../../Public/Routes/*.js'
-			//'../../Private/Controllers/*.js'
+			'../../Public/Controllers/*.js'
 		]
 	}
 };

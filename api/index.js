@@ -9,7 +9,7 @@ import readPublicRoutes from './Public/index';
 const PORT = process.env.PORT;
 const app = express();
 
-import { swaggerOpitons } from './src/config/swaggerOptions';
+import { swaggerOptions } from './src/config/swaggerOptions';
 const swaggerGenerator = require('express-swagger-generator')(app);
 
 app.use(bodyParser.json());
@@ -21,7 +21,7 @@ app.get('/health', (req, res) => {
 
 app.use('/public', readPublicRoutes);
 
-swaggerGenerator(swaggerOpitons);
+swaggerGenerator(swaggerOptions);
 
 app.listen(PORT, () => {
 	success({ message: `SERVER IS RUNNING ON ${PORT}`, badge: true });
