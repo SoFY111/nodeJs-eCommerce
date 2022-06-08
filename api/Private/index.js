@@ -5,6 +5,8 @@ import checkAuth from './middlewares/checkauth';
 
 const app = express();
 
+app.use(checkAuth);
+
 fs.readdir('./api/Private/Routes', (err, files) => {
 	if (err) throw err;
   

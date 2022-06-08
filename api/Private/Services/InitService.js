@@ -1,14 +1,9 @@
 import db from '../../src/models';
-import jwt from 'jsonwebtoken';
-
-import { JWT_SECRET } from '../../src/config/envKeys';
-
 class InitService{
 	
 	static async getUserRole(req){
 		try {
-			const token = req.headers.authorization;
-			const tokenData = jwt.verify(token, JWT_SECRET);
+			const tokenData = req.userData;
 			
 			const userData = await db.Users.findOne({
 				where: {id: tokenData.user_id},

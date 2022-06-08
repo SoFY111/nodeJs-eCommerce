@@ -6,10 +6,10 @@ module.exports = (req, res, next) => {
 	try {
 		const token = req.headers.authorization;
 		const tokenIsTrue = jwt.verify(token, JWT_SECRET);
-		console.log(tokenIsTrue);
+		req.userData = tokenIsTrue;
 		next();
 	}
 	catch (error) {
-		res.json({type: false, message: error.message});
+		res.json({type: false, message: 'unauthorized'});
 	}
 };
