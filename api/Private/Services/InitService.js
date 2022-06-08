@@ -6,7 +6,7 @@ class InitService{
 			const tokenData = req.userData;
 			
 			const userData = await db.Users.findOne({
-				where: {id: tokenData.user_id},
+				where: {id: tokenData.id},
 				attributes: [ 'username', 'email', 'name', 'surname' ],
 				include: {
 					model: db.Roles,

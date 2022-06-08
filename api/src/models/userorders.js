@@ -3,7 +3,7 @@ const {
 	Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-	class UserRoles extends Model {
+	class UserOrders extends Model {
 
 		/**
 		 * Helper method for defining associations.
@@ -11,20 +11,20 @@ module.exports = (sequelize, DataTypes) => {
 		 * The `models/index` file will call this method automatically.
 		 */
 		static associate(models) {
-			UserRoles.belongsToMany(models.Users, {
-				through: 'UserRoles',
+			UserOrders.belongsToMany(models.Users, {
+				through: 'UserOrders',
 				foreignKey: 'user_id',
-				otherKey: 'role_id'
+				otherKey: 'order_id'
 			});
 		}
 	
 	}
-	UserRoles.init({
+	UserOrders.init({
 		user_id: DataTypes.INTEGER,
-		role_id: DataTypes.INTEGER
+		order_id: DataTypes.INTEGER
 	}, {
 		sequelize,
-		modelName: 'UserRoles'
+		modelName: 'UserOrders'
 	});
-	return UserRoles;
+	return UserOrders;
 };

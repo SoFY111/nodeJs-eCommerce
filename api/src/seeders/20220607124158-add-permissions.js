@@ -31,6 +31,11 @@ module.exports = {
 			name: 'create_order',
 			createdAt: new Date(),
 			updatedAt: new Date()
+		},
+		{
+			name: 'create_product',
+			createdAt: new Date(),
+			updatedAt: new Date()
 		}
   
 		], {});

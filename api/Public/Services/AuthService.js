@@ -50,28 +50,32 @@ class AuthService{
 	}
 
 	static async login(body){
-		const user = await db.Users.findOne({where: {email: body.email, password: md5(body.password) }});
-		if (!user) return {
-			type: false,
-			message: 'Email or password is wrong. Invalid login credentials'
-		};
-				
-		const token = jwt.sign(
-			{
-				user_id: user.id,
-				username: user.username,
-				email: user.email
-			},
-			JWT_SECRET,
-			{ expiresIn: 86400 }
-		);
-
-		return {
-			type: true,
-			message: 'You are now logged in.',
-			token
-		};
-
+		try {
+			const user = await db.Users.findOne({where: {email: body.email, password: md5(body.password) }});
+			if (!user) return {
+				type: false,
+				message: 'Email or password is wrong. Invalid login credentials'
+			};
+					
+			const token = jwt.sign(
+				{
+					user_id: user.id,
+					username: user.username,
+					email: user.email
+				},
+				JWT_SECRET,
+				{ expiresIn: 86400 }
+			);
+	
+			return {
+				type: true,
+				message: 'You are now logged in.',
+				token
+			};	
+		}
+		catch (error) {
+			throw error;
+		}
 	}
 
 }

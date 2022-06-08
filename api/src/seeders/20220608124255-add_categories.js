@@ -12,39 +12,18 @@ module.exports = {
 		 * }], {});
 		 */
 
-		await queryInterface.bulkInsert('RolesAndPermissions', [
+		await queryInterface.bulkInsert('Categories', [
 			{
-				role_id: 1,
-				permission_id: 1,
+				name: 'First Category',
 				createdAt: new Date(),
 				updatedAt: new Date()
 			},
 			{
-				role_id: 1,
-				permission_id: 2,
-				createdAt: new Date(),
-				updatedAt: new Date()
-			},
-			{
-				role_id: 1,
-				permission_id: 3,
-				createdAt: new Date(),
-				updatedAt: new Date()
-			},
-			{
-				role_id: 1,
-				permission_id: 5,
-				createdAt: new Date(),
-				updatedAt: new Date()
-			},
-			{
-				role_id: 2,
-				permission_id: 4,
+				name: 'Second Category',
 				createdAt: new Date(),
 				updatedAt: new Date()
 			}
 		], {});
-
 	},
 
 	async down (queryInterface, Sequelize) {
@@ -55,6 +34,6 @@ module.exports = {
 		 * await queryInterface.bulkDelete('People', null, {});
 		 */
 
-		await queryInterface.bulkDelete('RolesAndPermissions', null, {});
+		await queryInterface.bulkDelete('Categories', null, {});
 	}
 };

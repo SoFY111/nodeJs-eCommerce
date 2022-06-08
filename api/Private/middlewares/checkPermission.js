@@ -14,7 +14,7 @@ class CheckPermission{
 						through: { attributes: [] },
 						include: {
 							model: db.Permissions,
-							where: {name: permName},
+							where: { name: permName },
 							through: { attributes: [] }
 						}
 					}
