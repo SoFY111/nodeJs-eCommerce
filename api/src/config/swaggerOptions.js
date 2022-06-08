@@ -12,11 +12,25 @@ module.exports = {
 				'application/json',
 				'application/xml'
 			],
-			schemes: [ 'http', 'https' ]
+			schemes: [ 'http', 'https' ],
+			security: [
+				{
+					JWT: []
+				}
+			],
+			securityDefinitions: {
+				JWT: {
+					type: 'apiKey',
+					in: 'header',
+					name: 'Authorization',
+					description: 'JWT Token'
+				}
+			}
 		},
 		basedir: __dirname, // app absolute path
 		files: [
-			'../../Public/Controllers/*.js'
+			'../../Public/Controllers/*.js',
+			'../../Private/Controllers/*.js'
 		]
 	}
 };

@@ -1,7 +1,25 @@
+/**  
+ * @typedef ProductCreateReq
+ * @property {integer} brand_id
+ * @property {integer} category_id
+ * @property {integer} subcategories
+ * @property {string} name
+ * @property {integer} stock
+ * @property {integer} price
+ * @property {string} description
+ */
 import ProductService from '../Services/ProductService';
 
 class ProductController{
 
+	/**
+	 * @route POST /private/product/create
+	 * @group Product
+	 * @summary Create new product
+	 * @param {ProductCreateReq.model} body.body
+	 * @returns {object} 200 - Success message
+	 * @returns {Error} default - Unexpected error
+	 */
 	static async createProduct(req, res){
 		try {
 			const result = await ProductService.createProduct(req.body);

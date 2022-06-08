@@ -4,7 +4,6 @@ import fs from 'fs';
 import checkAuth from './middlewares/checkAuth';
 
 const app = express();
-
 app.use(checkAuth);
 
 fs.readdir('./api/Private/Routes', (err, files) => {
