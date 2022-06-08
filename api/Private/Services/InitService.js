@@ -8,19 +8,19 @@ class InitService{
 	static async getUserRole(req){
 		try {
 			const token = req.headers.authorization;
-			const userData = jwt.verify(token, JWT_SECRET);
-
-			//TODO: token'dan gelen kullanıcının rol bilginisi bul
-			const userRoles = await db.UserRoles.findAll({where: { user_id: userData.user_id }});
-			if (userRoles.length > 0){
-				const element = [];
-				for (let i = 0;i < userRoles.length;i++) {
-					element.push(userRoles[i].role_id);
+			const tokenData = jwt.verify(token, JWT_SECRET);
+			
+			const userData = await db.Users.findOne({
+				where: {id: tokenData.user_id},
+				attributes: [ 'username', 'email', 'name', 'surname' ],
+				include: {
+					model: db.Roles,
+					attributes: [ 'name' ],
+					through: { attributes: [] }
 				}
-				console.log('userRole:', element);
-			}
+			});
 
-			return  {type: true, message: userData};
+			return  {type: true, message: 'successful', data: userData};
 		}
 		catch (error) {
 			return {type: false, message: error.message};

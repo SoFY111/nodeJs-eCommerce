@@ -6,11 +6,11 @@ class InitController{
 		res.json({type: true, message: 'successful'});
 	}
 
-	static async getUserData(req, res){
+	static async getUserRole(req, res){
 		try {
 			const result = await InitService.getUserRole(req);
 
-			if (result.type) res.json({type: true, message: result.message});
+			if (result.type) res.json({type: true, message: result.message, data: result.data});
 			else res.json({type: false, message: result.message});
 		}
 		catch (error) {

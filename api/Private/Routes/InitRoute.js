@@ -3,7 +3,7 @@ import InitController from '../Controllers/InitController';
 
 const app = express();
 
-app.get('/userdata', InitController.getUserData);
+app.get('/userrole', InitController.getUserRole);
 
 app.get('/health', InitController.health);
 
