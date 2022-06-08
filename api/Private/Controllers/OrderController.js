@@ -6,6 +6,10 @@ class OrderController{
 		res.json({type: true, message: 'successful'});
 	}
 
+	static async CreateOrder(req, res){
+		res.json({type: true, message: 'create_order'});
+	}
+
 }
 
 export default OrderController;
