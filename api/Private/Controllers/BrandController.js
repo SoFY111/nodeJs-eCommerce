@@ -4,6 +4,7 @@
  */
 
 import BrandService from '../Services/BrandService';
+import joi from 'joi';
 
 class BrandController{
 
@@ -17,6 +18,13 @@ class BrandController{
 	 */
 	static async createBrand(req, res){
 		try {
+			
+			const schema = joi.object().keys({
+				name: joi.string().min(3).required()
+			});
+
+			await schema.validateAsync(req.body);
+
 			const result = await BrandService.createBrand(req.body);
       
 			if (result.type)
@@ -60,6 +68,13 @@ class BrandController{
 	 */
 	static async deleteBrand(req, res){
 		try {
+
+			const schema = joi.object().keys({
+				id: joi.number().required()
+			});
+
+			await schema.validateAsync(req.params);
+
 			const result = await BrandService.deleteBrand(req.params.id);
       
 			if (result.type)

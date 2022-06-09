@@ -15,6 +15,9 @@
  */
 
 import AuthService from '../Services/AuthService';
+import AuthValidation from '../validation/AuthValidation';
+
+import joi from 'joi';
 
 class AuthController{
 
@@ -32,6 +35,12 @@ class AuthController{
 	 */
 	static async register(req, res){
 		try {
+
+			const validation = await AuthValidation.authRegisterValidation(req.body);
+
+			if (!validation.type)
+				res.json({type: false, message: validation.message});
+
 			const result = await AuthService.register(req.body);
 
 			if (result.type) res.json({type: true, message: result.message});
@@ -52,6 +61,14 @@ class AuthController{
 	 */
 	static async login(req, res){
 		try {
+
+			const schema = joi.object().keys({
+				email: joi.string().email().required(),
+				password: joi.string().min(5).pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
+			});
+
+			await schema.validateAsync(req.body);
+
 			const result = await AuthService.login(req.body);
 
 			if (result.type) res.json({type: true, message: result.message, data: {token: result.token}});

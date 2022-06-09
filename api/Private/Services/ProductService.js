@@ -43,21 +43,24 @@ class ProductService{
 					'stock',
 					'price',
 					'description',
+					[ Sequelize.col('Brand.id'), 'brandId' ],
 					[ Sequelize.col('Brand.name'), 'brandName' ],
+					[ Sequelize.col('SubCategory.Category.id'), 'categoryId' ],
 					[ Sequelize.col('SubCategory.Category.name'), 'categoryName' ],
+					[ Sequelize.col('SubCategory.id'), 'subCategoryId' ],
 					[ Sequelize.col('SubCategory.name'), 'subCategoryName' ]
 				],
 				include: [
 					{
 						model: db.Brands,
-						attributes: [ 'id' ]
+						attributes: [  ]
 					},
 					{
 						model: db.SubCategories,
-						attributes: [ 'id' ],
+						attributes: [  ],
 						include: {
 							model: db.Categories,
-							attributes: [ 'id' ]
+							attributes: [  ]
 						}
 					}
 				]

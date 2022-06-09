@@ -2,6 +2,7 @@ require('dotenv').config();
 
 import express from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import { success } from 'consola';
 
 import publicRoutes from './Public/index';
@@ -13,6 +14,7 @@ const app = express();
 import { swaggerOptions } from './src/config/swaggerOptions';
 const swaggerGenerator = require('express-swagger-generator')(app);
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
