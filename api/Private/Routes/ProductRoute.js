@@ -6,7 +6,9 @@ import ProductController from '../Controllers/ProductController';
 
 const app = express();
 
-app.post('/create', CheckPermission.checkPermission('create_product'), ProductController.createProduct);
+app.post('/', CheckPermission.checkPermission('create_product'), ProductController.createProduct);
+app.delete('/delete/:id', CheckPermission.checkPermission('delete_product'), ProductController.deleteProduct);
+app.get('/list', ProductController.getProducts);
 
 app.get('/health', ProductController.health);
 

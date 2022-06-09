@@ -36,8 +36,12 @@ module.exports = {
 			name: 'create_product',
 			createdAt: new Date(),
 			updatedAt: new Date()
+		},
+		{
+			name: 'delete_product',
+			createdAt: new Date(),
+			updatedAt: new Date()
 		}
-  
 		], {});
 	},
 

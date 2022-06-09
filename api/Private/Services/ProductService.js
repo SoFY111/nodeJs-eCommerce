@@ -31,11 +31,64 @@ class ProductService{
 
 		}
 		catch (error) {
-			/*
-			 * if (error.name === 'SequelizeForeignKeyConstraintError')
-			 * return ({ type: false, message: 'product not created, foreign_key_error' }); 
-			 */
+			
+			if (error.name === 'SequelizeForeignKeyConstraintError')
+				return ({ 
+					type: false, 
+					message: `product not created, foreign_key_error: ${error.parent.constraint}` 
+				}); 
 
+			throw error;
+		}
+	}
+
+	static async getProducts(){
+		try {
+			const result = await db.Products.findAll({
+				attributes: [ 'id', 'name', 'stock', 'price', 'description' ],
+				include: [
+					{
+						model: db.Brands,
+						attributes: [ 'id', 'name' ]
+					},
+					{
+						model: db.SubCategories,
+						attributes: [ 'id', 'name' ],
+						include: {
+							model: db.Categories,
+							attributes: [ 'id', 'name' ]
+						
+						}
+					}
+				]
+			});
+
+			if (!result)
+				return ({ type: false, message: 'products not found' });
+	
+			return ({ type: true, message: 'successful', data: result });
+		}
+		catch (error) {
+			throw error;
+		}
+	}
+
+	static async deleteProduct(productId){
+		try {
+			
+			const result = await db.Products.destroy({
+				where: {
+					id: productId
+				}
+			}); 
+			
+			if (!result)
+				return ({ type: false, message: 'products not deleted' });
+			
+			return ({ type: true, message: 'successful' }); 
+			
+		}
+		catch (error) {
 			throw error;
 		}
 	}
