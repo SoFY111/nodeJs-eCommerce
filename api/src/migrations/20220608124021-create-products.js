@@ -10,6 +10,7 @@ module.exports = {
 			},
 			brand_id: {
 				type: Sequelize.INTEGER,
+				allowNull: false,
 				references: {
 					model: 'Brands',
 					key: 'id'
@@ -17,22 +18,27 @@ module.exports = {
 			},
 			subCategory_id: {
 				type: Sequelize.INTEGER,
+				allowNull: false,
 				references: {	
 					model: 'SubCategories',
 					key: 'id'
 				}
 			},
 			name: {
-				type: Sequelize.STRING
+				type: Sequelize.STRING,
+				allowNull: false
 			},
 			stock: {
-				type: Sequelize.INTEGER
+				type: Sequelize.INTEGER,
+				allowNull: false
 			},
 			price: {
-				type: Sequelize.DOUBLE
+				type: Sequelize.DOUBLE,
+				allowNull: false
 			},
 			description: {
-				type: Sequelize.TEXT
+				type: Sequelize.TEXT,
+				allowNull: false
 			},
 			createdAt: {
 				allowNull: false,

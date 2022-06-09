@@ -10,16 +10,19 @@ module.exports = {
 			},
 			user_id: {
 				type: Sequelize.INTEGER,
+				allowNull: false,
 				references: {
 					model: 'Users',
 					key: 'id'
 				}
 			},
 			productIdsandCount: {
-				type: Sequelize.TEXT
+				type: Sequelize.TEXT,
+				allowNull: false
 			},
 			total_price: {
-				type: Sequelize.DOUBLE
+				type: Sequelize.DOUBLE,
+				allowNull: false
 			},
 			createdAt: {
 				allowNull: false,

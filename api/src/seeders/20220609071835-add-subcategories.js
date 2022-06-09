@@ -12,7 +12,7 @@ module.exports = {
 		 * }], {});
 		 */
 
-		await queryInterface.bulkInsert('Categories', [
+		await queryInterface.bulkInsert('SubCategories', [
 			{
 				category_id: 1,
 				name: 'First SubCategory (1,1)',
@@ -39,7 +39,7 @@ module.exports = {
 			},
 			{
 				category_id: 2,
-				name: 'First SubCategory (2,3)',
+				name: '5th SubCategory (2,3)',
 				createdAt: new Date(),
 				updatedAt: new Date()
 			}
@@ -54,6 +54,6 @@ module.exports = {
 		 * await queryInterface.bulkDelete('People', null, {});
 		 */
 
-		await queryInterface.bulkDelete('Categories', [], {});
+		await queryInterface.bulkDelete('SubCategories', [], {});
 	}
 };
