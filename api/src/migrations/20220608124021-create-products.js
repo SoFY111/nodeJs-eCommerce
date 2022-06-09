@@ -14,7 +14,9 @@ module.exports = {
 				references: {
 					model: 'Brands',
 					key: 'id'
-				}
+				},
+				onDelete: 'CASCADE',
+				onUpdate: 'CASCADE'
 			},
 			subCategory_id: {
 				type: Sequelize.INTEGER,
@@ -22,7 +24,9 @@ module.exports = {
 				references: {	
 					model: 'SubCategories',
 					key: 'id'
-				}
+				},
+				onDelete: 'CASCADE',
+				onUpdate: 'CASCADE'
 			},
 			name: {
 				type: Sequelize.STRING,

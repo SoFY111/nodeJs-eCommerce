@@ -22,7 +22,9 @@ module.exports = {
 				references: {
 					model: 'Permissions',
 					key: 'id'
-				}
+				},
+				onDelete: 'CASCADE',
+				onUpdate: 'CASCADE'
 			},
 			createdAt: {
 				allowNull: false,

@@ -12,9 +12,7 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			SubCategories.belongsTo(models.Categories, {
-				foreignKey: 'category_id',
-				onDelete: 'CASCADE',
-				onUpdate: 'CASCADE'
+				foreignKey: 'category_id'
 			});
 		}
 	

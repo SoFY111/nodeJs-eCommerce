@@ -14,7 +14,9 @@ module.exports = {
 				refences: {
 					model: 'Users',
 					key: 'id'
-				}
+				},
+				onDelete: 'CASCADE',
+				onUpdate: 'CASCADE'
 			},
 			role_id: {
 				type: Sequelize.INTEGER,
@@ -22,7 +24,9 @@ module.exports = {
 				refences: {
 					model: 'Roles',
 					key: 'id'
-				}
+				},
+				onDelete: 'CASCADE',
+				onUpdate: 'CASCADE'
 			},
 			createdAt: {
 				allowNull: false,
