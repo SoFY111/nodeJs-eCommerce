@@ -35,7 +35,7 @@ class ProductController{
 	}
 
 	/**
-	 * @route GET /private/product/list
+	 * @route GET /private/product/
 	 * @group Product
 	 * @summary Get all products
 	 * @returns {object} 200 - Success message
@@ -56,10 +56,10 @@ class ProductController{
 	}
 
 	/**
-	 * @route DELETE /private/product/delete/{id}
+	 * @route DELETE /private/product/{id}
 	 * @group Product
 	 * @summary Delete specific product
-	 * @param {integer} id
+	 * @param {number} id.path
 	 * @returns {object} 200 - Success message
 	 * @returns {Error} default - Unexpected error
 	 */

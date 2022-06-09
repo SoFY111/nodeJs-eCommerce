@@ -7,8 +7,8 @@ import ProductController from '../Controllers/ProductController';
 const app = express();
 
 app.post('/', CheckPermission.checkPermission('create_product'), ProductController.createProduct);
-app.delete('/delete/:id', CheckPermission.checkPermission('delete_product'), ProductController.deleteProduct);
-app.get('/list', ProductController.getProducts);
+app.delete('/:id', CheckPermission.checkPermission('delete_product'), ProductController.deleteProduct);
+app.get('/', ProductController.getProducts);
 
 app.get('/health', ProductController.health);
 

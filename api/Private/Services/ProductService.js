@@ -1,18 +1,10 @@
+import { Sequelize } from 'sequelize';
 import db from '../../src/models';
 
 class ProductService{
 
 	static async createProduct(body){
 		try {
-			if (
-				!body.brand_id, 
-				!body.subcategory_id,
-				!body.name,
-				!body.stock,
-				!body.price,
-				!body.description
-			)
-				return ({ type: false, message: 'enter all columns' });
 
 			console.log(body);
 
@@ -45,19 +37,27 @@ class ProductService{
 	static async getProducts(){
 		try {
 			const result = await db.Products.findAll({
-				attributes: [ 'id', 'name', 'stock', 'price', 'description' ],
+				attributes: [ 
+					'id',
+					'name',
+					'stock',
+					'price',
+					'description',
+					[ Sequelize.col('Brand.name'), 'brandName' ],
+					[ Sequelize.col('SubCategory.Category.name'), 'categoryName' ],
+					[ Sequelize.col('SubCategory.name'), 'subCategoryName' ]
+				],
 				include: [
 					{
 						model: db.Brands,
-						attributes: [ 'id', 'name' ]
+						attributes: [ 'id' ]
 					},
 					{
 						model: db.SubCategories,
-						attributes: [ 'id', 'name' ],
+						attributes: [ 'id' ],
 						include: {
 							model: db.Categories,
-							attributes: [ 'id', 'name' ]
-						
+							attributes: [ 'id' ]
 						}
 					}
 				]
