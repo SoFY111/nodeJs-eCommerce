@@ -16,12 +16,8 @@ module.exports = (sequelize, DataTypes) => {
 				foreignKey: 'user_id',
 				otherKey: 'role_id'
 			});
-			
-			Users.belongsToMany(models.Orders, {
-				through: models.UserOrders,
-				foreignKey: 'user_id',
-				otherKey: 'order_id'
-			});
+
+			Users.hasMany(models.Orders, {foreignKey: 'user_id'});
 		}
 	
 	}

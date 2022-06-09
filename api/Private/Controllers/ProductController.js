@@ -1,8 +1,7 @@
 /**  
  * @typedef ProductCreateReq
  * @property {integer} brand_id
- * @property {integer} category_id
- * @property {integer} subcategories
+ * @property {integer} subCategory_id
  * @property {string} name
  * @property {integer} stock
  * @property {integer} price
@@ -27,15 +26,15 @@ class ProductController{
 			if (result.type) 
 				res.json({type: true, message: 'successful', data: result.data});
 			else
-				res.json({type: false, message: result.message});	
+				res.status(400).json({type: false, message: result.message});	
 		}
 		catch (error) {
-			res.json({type: false, message: error.message});
+			res.status(400).json({type: false, message: error.message});
 		}
 	}
 
 	static async health(req, res){
-		res.json({type: true, message: 'successful'});
+		res.status(200).json({type: true, message: 'successful'});
 	}
 
 }

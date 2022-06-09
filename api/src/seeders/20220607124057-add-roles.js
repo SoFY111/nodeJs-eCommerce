@@ -12,16 +12,17 @@ module.exports = {
 		 * }], {});
 		 */
 
-		await queryInterface.bulkInsert('Roles', [ {
-			name: 'admin',
-			createdAt: new Date(),
-			updatedAt: new Date()
-		}, 
-		{
-			name: 'user',
-			createdAt: new Date(),
-			updatedAt: new Date()
-		}
+		await queryInterface.bulkInsert('Roles', [ 
+			{
+				name: 'admin',
+				createdAt: new Date(),
+				updatedAt: new Date()
+			}, 
+			{
+				name: 'user',
+				createdAt: new Date(),
+				updatedAt: new Date()
+			}
   
 		], {});
 

@@ -6,8 +6,7 @@ class ProductService{
 		try {
 			if (
 				!body.brand_id, 
-				!body.categories_id, 
-				!body.subcategories_id,
+				!body.subcategory_id,
 				!body.name,
 				!body.stock,
 				!body.price,
@@ -19,14 +18,12 @@ class ProductService{
 
 			const result = await db.Products.create({
 				brand_id: body.brand_id, 
-				category_id: body.category_id, 
-				subCategories: body.subcategories,
+				subCategory_id: body.subCategory_id,
 				name: body.name, 
 				stock: body.stock,
 				price: body.price,
 				description: body.description
 			});
-
 			if (!result)
 				return ({ type: false, message: 'product not created' });
 	
@@ -34,6 +31,11 @@ class ProductService{
 
 		}
 		catch (error) {
+			/*
+			 * if (error.name === 'SequelizeForeignKeyConstraintError')
+			 * return ({ type: false, message: 'product not created, foreign_key_error' }); 
+			 */
+
 			throw error;
 		}
 	}

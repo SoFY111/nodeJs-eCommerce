@@ -51,12 +51,14 @@ class AuthService{
 
 	static async login(body){
 		try {
+
 			const user = await db.Users.findOne({where: {email: body.email, password: md5(body.password) }});
+
 			if (!user) return {
 				type: false,
 				message: 'Email or password is wrong. Invalid login credentials'
 			};
-					
+
 			const token = jwt.sign(
 				{
 					user_id: user.id,
@@ -74,6 +76,7 @@ class AuthService{
 			};	
 		}
 		catch (error) {
+			console.log(error);
 			throw error;
 		}
 	}

@@ -6,7 +6,9 @@
  * @property {string} surname
  * @property {string} password
  *
- *
+ */
+
+/** 
  * @typedef AuthReqLogin
  * @property {string} email
  * @property {string} password
