@@ -4,8 +4,7 @@
  */
 
 import BrandService from '../Services/BrandService';
-import joi from 'joi';
-
+import BrandValidation from '../validation/BrandValidation';
 class BrandController{
 
 	/**
@@ -18,19 +17,20 @@ class BrandController{
 	 */
 	static async createBrand(req, res){
 		try {
-			
-			const schema = joi.object().keys({
-				name: joi.string().min(3).required()
-			});
 
-			await schema.validateAsync(req.body);
+			const validation = await BrandValidation.createBrandValidation(req.body); 
 
-			const result = await BrandService.createBrand(req.body);
+			if (!validation.type)
+				res.status(400).json({type: false, message: validation.message});	
+
+			else {
+				const result = await BrandService.createBrand(req.body);
       
-			if (result.type)
-				res.json({type: true, message: 'successful', data: result.data});
-			else
-				res.status(400).json({type: false, message: result.message});	
+				if (result.type)
+					res.json({type: true, message: 'successful', data: result.data});
+				else
+					res.status(400).json({type: false, message: result.message});	
+			}
 		}
 		catch (error) {
 			res.status(400).json({type: false, message: error.message});
@@ -69,18 +69,20 @@ class BrandController{
 	static async deleteBrand(req, res){
 		try {
 
-			const schema = joi.object().keys({
-				id: joi.number().required()
-			});
+			const validation = await BrandValidation.deleteBrandValidation(req.params);
 
-			await schema.validateAsync(req.params);
+			if (!validation.type)
+				res.status(400).json({type: false, message: validation.message});
 
-			const result = await BrandService.deleteBrand(req.params.id);
-      
-			if (result.type)
-				res.json({type: true, message: 'successful', data: result.data});
-			else
-				res.status(400).json({type: false, message: result.message});	
+			else {
+
+				const result = await BrandService.deleteBrand(req.params.id);
+				
+				if (result.type)
+					res.json({type: true, message: 'successful', data: result.data});
+				else
+					res.status(400).json({type: false, message: result.message});
+			}	
 		}
 		catch (error) {
 			res.status(400).json({type: false, message: error.message});
@@ -98,12 +100,19 @@ class BrandController{
 	 */
 	static async updateBrand(req, res){
 		try {
-			const result = await BrandService.updateBrand(req.params.id, req.body);
+
+			const validation = await BrandValidation.updateBrandValidation({id: req.params.id, name: req.body.name});
+
+			if (!validation.type) 
+				res.status(400).json({type: false, message: validation.message});	
+			else {
+				const result = await BrandService.updateBrand(req.params.id, req.body);
       
-			if (result.type)
-				res.json({type: true, message: 'successful', data: result.data});
-			else
-				res.status(400).json({type: false, message: result.message});	
+				if (result.type)
+					res.json({type: true, message: 'successful', data: result.data});
+				else
+					res.status(400).json({type: false, message: result.message});
+			}	
 		}
 		catch (error) {
 			res.status(400).json({type: false, message: error.message});

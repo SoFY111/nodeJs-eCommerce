@@ -2,7 +2,7 @@ import Joi from 'Joi';
 
 class AuthValidation{
 
-	static async authRegisterValidation(data){
+	static async registerValidation(data){
 		try {
 			const schema = Joi.object().keys({
 				username: Joi.string().min(3).max(18).required(),
@@ -12,11 +12,27 @@ class AuthValidation{
 				surname: Joi.string().min(3).required()
 			});
 
-			schema.validateAsync(data);
+			await schema.validateAsync(data);
+			return ({type: true});
 
 		}
 		catch (error) {
-			return ({type: false, message: 'invalid data'});
+			return ({type: false, message: error.message});
+		}
+	}
+
+	static async loginValidation(data){
+		try {
+			const schema = Joi.object().keys({
+				email: Joi.string().email().required(),
+				password: Joi.string().min(5).pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
+			});
+	
+			await schema.validateAsync(data);
+			return ({type: true});
+		}
+		catch (error) {
+			return ({type: false, message: error.message});
 		}
 	}
 

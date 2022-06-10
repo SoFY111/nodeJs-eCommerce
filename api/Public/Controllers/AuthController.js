@@ -36,15 +36,16 @@ class AuthController{
 	static async register(req, res){
 		try {
 
-			const validation = await AuthValidation.authRegisterValidation(req.body);
+			const validation = await AuthValidation.registerValidation(req.body);
 
 			if (!validation.type)
 				res.json({type: false, message: validation.message});
+			else {
+				const result = await AuthService.register(req.body);
 
-			const result = await AuthService.register(req.body);
-
-			if (result.type) res.json({type: true, message: result.message});
-			else res.json({type: false, message: result.message});
+				if (result.type) res.json({type: true, message: result.message});
+				else res.json({type: false, message: result.message});
+			}
 		}
 		catch (error) {
 			res.json({type: false, message: error.message});
@@ -62,17 +63,19 @@ class AuthController{
 	static async login(req, res){
 		try {
 
-			const schema = joi.object().keys({
-				email: joi.string().email().required(),
-				password: joi.string().min(5).pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
-			});
+			const validation = await AuthValidation.loginValidation(req.body);
 
-			await schema.validateAsync(req.body);
+			console.log(validation);
 
-			const result = await AuthService.login(req.body);
+			if (!validation.type)
+				res.json({type: false, message: validation.message});
+			else {
+				const result = await AuthService.login(req.body);
 
-			if (result.type) res.json({type: true, message: result.message, data: {token: result.token}});
-			else res.json({type: false, message: result.message});
+				if (result.type) res.json({type: true, message: result.message, data: {token: result.token}});
+				else res.json({type: false, message: result.message});
+			}
+
 		}
 		catch (error) {
 			res.json({type: false, message: error.message});

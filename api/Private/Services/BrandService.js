@@ -31,7 +31,10 @@ class BrandService{
 	static async getBrands(){
 		try {
 			const result = await db.Brands.findAll({
-				attributes: [ 'id', 'name' ]
+				where: {
+					isDeleted: 0
+				},
+				attributes: [ 'id', 'name', 'isDeleted' ]
 			});
 
 			if (!result)
@@ -46,11 +49,16 @@ class BrandService{
 
 	static async deleteBrand(id){
 		try {
-			const result = await db.Brands.destroy({
+			const result = await db.Brands.update({ 
+				isDeleted: 'aasd' 
+			}, 
+			{ 
 				where: {
-					id
+					id: id 
 				}
 			});
+
+			console.log(id);
 
 			if (!result)
 				return ({ type: false, message: 'not deleted.' });
