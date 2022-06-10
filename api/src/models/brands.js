@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
 	
 	}
 	Brands.init({
-		name: DataTypes.STRING
+		name: DataTypes.STRING,
+		isDeleted: DataTypes.INTEGER
 	}, {
 		sequelize,
 		modelName: 'Brands'

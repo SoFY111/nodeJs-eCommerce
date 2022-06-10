@@ -49,16 +49,17 @@ class BrandService{
 
 	static async deleteBrand(id){
 		try {
-			const result = await db.Brands.update({ 
-				isDeleted: 'aasd' 
-			}, 
-			{ 
-				where: {
-					id: id 
-				}
-			});
-
 			console.log(id);
+			const result = await db.Brands.update({
+				isDeleted: 1
+			}, {
+				where: {
+					id: id
+				}
+			}
+			);
+
+			console.log(result);
 
 			if (!result)
 				return ({ type: false, message: 'not deleted.' });

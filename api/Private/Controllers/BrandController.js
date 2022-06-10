@@ -23,14 +23,12 @@ class BrandController{
 			if (!validation.type)
 				res.status(400).json({type: false, message: validation.message});	
 
-			else {
-				const result = await BrandService.createBrand(req.body);
+			const result = await BrandService.createBrand(req.body);
       
-				if (result.type)
-					res.json({type: true, message: 'successful', data: result.data});
-				else
-					res.status(400).json({type: false, message: result.message});	
-			}
+			if (result.type)
+				res.json({type: true, message: 'successful', data: result.data});
+			else
+				res.status(400).json({type: false, message: result.message});
 		}
 		catch (error) {
 			res.status(400).json({type: false, message: error.message});
@@ -59,37 +57,6 @@ class BrandController{
 	}
 
 	/**
-	 * @route DELETE /private/brand/{id}
-	 * @group Brand
-	 * @summary Delete specific brand
-	 * @param {number} id.path
-	 * @returns {object} 200 - Success message
-	 * @returns {Error} default - Unexpected error
-	 */
-	static async deleteBrand(req, res){
-		try {
-
-			const validation = await BrandValidation.deleteBrandValidation(req.params);
-
-			if (!validation.type)
-				res.status(400).json({type: false, message: validation.message});
-
-			else {
-
-				const result = await BrandService.deleteBrand(req.params.id);
-				
-				if (result.type)
-					res.json({type: true, message: 'successful', data: result.data});
-				else
-					res.status(400).json({type: false, message: result.message});
-			}	
-		}
-		catch (error) {
-			res.status(400).json({type: false, message: error.message});
-		}
-	}
-
-	/**
 	 * @route PUT /private/brand/{id}
 	 * @group Brand
 	 * @summary Update specific brand
@@ -105,14 +72,40 @@ class BrandController{
 
 			if (!validation.type) 
 				res.status(400).json({type: false, message: validation.message});	
-			else {
-				const result = await BrandService.updateBrand(req.params.id, req.body);
-      
-				if (result.type)
-					res.json({type: true, message: 'successful', data: result.data});
-				else
-					res.status(400).json({type: false, message: result.message});
-			}	
+			
+			const result = await BrandService.updateBrand(req.params.id, req.body);
+			if (result.type)
+				res.json({type: true, message: 'successful', data: result.data});
+			else
+				res.status(400).json({type: false, message: result.message});	
+		}
+		catch (error) {
+			res.status(400).json({type: false, message: error.message});
+		}
+	}
+
+	/**
+	 * @route PUT /private/brand/delete/{id}
+	 * @group Brand
+	 * @summary Delete specific brand
+	 * @param {number} id.path
+	 * @returns {object} 200 - Success message
+	 * @returns {Error} default - Unexpected error
+	 */
+	 static async deleteBrand(req, res){
+		try {
+
+			const validation = await BrandValidation.deleteBrandValidation(req.params);
+
+			if (!validation.type)
+				res.status(400).json({type: false, message: validation.message});
+
+			const result = await BrandService.deleteBrand(req.params.id);
+				
+			if (result.type)
+				res.json({type: true, message: 'successful', data: result.data});
+			else
+				res.status(400).json({type: false, message: result.message});
 		}
 		catch (error) {
 			res.status(400).json({type: false, message: error.message});

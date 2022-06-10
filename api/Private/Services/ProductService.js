@@ -37,6 +37,9 @@ class ProductService{
 	static async getProducts(){
 		try {
 			const result = await db.Products.findAll({
+				where: {
+					isDeleted: 0
+				},
 				attributes: [ 
 					'id',
 					'name',
@@ -48,7 +51,8 @@ class ProductService{
 					[ Sequelize.col('SubCategory.Category.id'), 'categoryId' ],
 					[ Sequelize.col('SubCategory.Category.name'), 'categoryName' ],
 					[ Sequelize.col('SubCategory.id'), 'subCategoryId' ],
-					[ Sequelize.col('SubCategory.name'), 'subCategoryName' ]
+					[ Sequelize.col('SubCategory.name'), 'subCategoryName' ],
+					'isDeleted'
 				],
 				include: [
 					{
@@ -78,8 +82,9 @@ class ProductService{
 
 	static async deleteProduct(productId){
 		try {
-			
-			const result = await db.Products.destroy({
+			const result = await db.Products.update({
+				isDeleted: 1
+			}, {
 				where: {
 					id: productId
 				}
@@ -88,7 +93,7 @@ class ProductService{
 			if (!result)
 				return ({ type: false, message: 'products not deleted' });
 			
-			return ({ type: true, message: 'successful' }); 
+			return ({ type: true, message: 'successful', data: result}); 
 			
 		}
 		catch (error) {

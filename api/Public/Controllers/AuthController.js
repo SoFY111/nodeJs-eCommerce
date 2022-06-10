@@ -17,8 +17,6 @@
 import AuthService from '../Services/AuthService';
 import AuthValidation from '../validation/AuthValidation';
 
-import joi from 'joi';
-
 class AuthController{
 
 	static async health(req, res){

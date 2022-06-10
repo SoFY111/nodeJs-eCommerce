@@ -9,7 +9,7 @@
  */
 
 import ProductService from '../Services/ProductService';
-
+import ProductValidation from '../validation/ProductValidation';
 class ProductController{
 
 	/**
@@ -22,12 +22,20 @@ class ProductController{
 	 */
 	static async createProduct(req, res){
 		try {
-			const result = await ProductService.createProduct(req.body);
 
-			if (result.type) 
-				res.json({type: true, message: 'successful', data: result.data});
-			else
-				res.status(400).json({type: false, message: result.message});	
+			const validation = await ProductValidation.createProductValidation(req.body);
+
+			if (!validation.type)
+				res.status(400).json({type: false, message: validation.message});
+
+			else {
+				const result = await ProductService.createProduct(req.body);
+
+				if (result.type) 
+					res.json({type: true, message: 'successful', data: result.data});
+				else
+					res.status(400).json({type: false, message: result.message});
+			}	
 		}
 		catch (error) {
 			res.status(400).json({type: false, message: error.message});
@@ -56,7 +64,7 @@ class ProductController{
 	}
 
 	/**
-	 * @route DELETE /private/product/{id}
+	 * @route PUT /private/product/delete/{id}
 	 * @group Product
 	 * @summary Delete specific product
 	 * @param {number} id.path
@@ -65,6 +73,11 @@ class ProductController{
 	 */
 	static async deleteProduct(req, res){
 		try {
+			const validation = await ProductValidation.deleteProductValidation(req.params);
+
+			if (!validation.type)
+				res.status(400).json({type: false, message: validation.message});	
+
 			const result = await ProductService.deleteProduct(req.params.id);
 
 			if (result.type) 
