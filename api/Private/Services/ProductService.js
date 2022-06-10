@@ -5,9 +5,6 @@ class ProductService{
 
 	static async createProduct(body){
 		try {
-
-			console.log(body);
-
 			const result = await db.Products.create({
 				brand_id: body.brand_id, 
 				subCategory_id: body.subCategory_id,

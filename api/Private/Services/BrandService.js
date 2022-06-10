@@ -4,9 +4,6 @@ class BrandService{
 
 	static async createBrand(body){
 		try {
-			if (!body.name)
-				return ({type: false, message: 'name is required'});
-
 			const result = await db.Brands.create({
 				name: body.name
 			});
@@ -49,7 +46,6 @@ class BrandService{
 
 	static async deleteBrand(id){
 		try {
-			console.log(id);
 			const result = await db.Brands.update({
 				isDeleted: 1
 			}, {
@@ -73,9 +69,7 @@ class BrandService{
 
 	static async updateBrand(id, body){
 		try {
-			if (!body.name)
-				return ({type: false, message: 'name is required'});
-        
+
 			const result = await db.Brands.update({
 				name: body.name
 			}, {
