@@ -17,6 +17,8 @@ module.exports = (sequelize, DataTypes) => {
 			Products.belongsTo(models.SubCategories, {
 				foreignKey: 'subCategory_id'
 			});
+
+			Products.hasMany(models.Cards, {foreignKey: 'product_id'});
 		}
 	
 	}

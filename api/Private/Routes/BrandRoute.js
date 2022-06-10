@@ -6,10 +6,10 @@ import CheckPermission from '../middlewares/checkPermission';
 
 const app = express();
 
-app.post('/', CheckPermission.checkPermission('create_product'), BrandController.createBrand);
-app.get('/', CheckPermission.checkPermission('create_product'), BrandController.getBrands);
-app.put('/delete/:id', CheckPermission.checkPermission('create_product'), BrandController.deleteBrand);
-app.put('/:id', CheckPermission.checkPermission('create_product'), BrandController.updateBrand);
+app.post('/', CheckPermission.checkPermission('create_brand'), BrandController.createBrand);
+app.get('/', BrandController.getBrands);
+app.put('/delete/:id', CheckPermission.checkPermission('delete_brand'), BrandController.deleteBrand);
+app.put('/:id', CheckPermission.checkPermission('update_brand'), BrandController.updateBrand);
 
 app.get('/health', BrandController.health);
 

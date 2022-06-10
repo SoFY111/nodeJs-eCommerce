@@ -41,7 +41,68 @@ module.exports = {
 			name: 'delete_product',
 			createdAt: new Date(),
 			updatedAt: new Date()
+		},
+		{
+			name: 'create_brand',
+			createdAt: new Date(),
+			updatedAt: new Date()
+		},
+		{
+			name: 'update_brand',
+			createdAt: new Date(),
+			updatedAt: new Date()
+		},
+		{
+			name: 'delete_brand',
+			createdAt: new Date(),
+			updatedAt: new Date()
+		},
+		{
+			name: 'update_product',
+			createdAt: new Date(),
+			updatedAt: new Date()
+		},
+		{
+			name: 'delete_product',
+			createdAt: new Date(),
+			updatedAt: new Date()
+		},
+		{
+			name: 'create_card',
+			createdAt: new Date(),
+			updatedAt: new Date()
+		},
+		{
+			name: 'get_user_card',
+			createdAt: new Date(),
+			updatedAt: new Date()
+		},
+		{
+			name: 'delete_product_on_card',
+			createdAt: new Date(),
+			updatedAt: new Date()
+		},
+		{
+			name: 'update_card',
+			createdAt: new Date(),
+			updatedAt: new Date()
+		},
+		{
+			name: 'delete_card',
+			createdAt: new Date(),
+			updatedAt: new Date()
+		},
+		{
+			name: 'get_all_cards',
+			createdAt: new Date(),
+			updatedAt: new Date()
+		},
+		{
+			name: 'add_product_to_card',
+			createdAt: new Date(),
+			updatedAt: new Date()
 		}
+		
 		], {});
 	},
 
