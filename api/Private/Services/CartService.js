@@ -53,7 +53,6 @@ class CartService{
 	}
 
 	static async addProductToCard(user_id, body){
-
 		try {
 
 			const product = await db.Products.findOne({
@@ -164,43 +163,54 @@ class CartService{
 
 	static async coniformCard(user_id){
 
-		const result = await db.Users.findOne({
-			where: {
-				id: user_id,
-				isDeleted: false
-			},
- 			attributes: [ 'username', 'email' ],
-			include: {
-				model: db.Carts,
-				attributes: [ 'product_id', 'count', 'total_price' ]
+		const t = await db.sequelize.transaction();
+
+		try {
+			const productsInCart = await db.Carts.findAll({
+				where: {
+					user_id
+				},
+				attributes: [
+					'product_id', 
+					'count', 
+					'total_price'
+				 ]
+			});	
+
+			let totalPrice = 0;
+			for (let i = 0;i < productsInCart.length;i++) {
+				totalPrice = productsInCart[i].total_price + totalPrice;
 			}
-		});
+			
+			const orderTable = await db.Orders.create({
+			  user_id,
+			  total_price: totalPrice.toFixed(2),
+			  isCompleted: false
+			 }, {transaction: t});  
 
-		/*
-		 * const result = await db.Carts.findAll({
-		 * where: {
-		 * user_id
-		 * },
-		 * attributes: [ 
-		 * 'product_id',
-		 * [ Sequelize.col('Product.name'), 'product_name' ],
-		 * 'count',
-		 * 'total_price'
-		 * ],
-		 * include: {
-		 * model: db.Products,
-		 * attributes: [ ],
-		 * include: [
-		 * {
-		 *	 model: db.Brands,
-		 *	 attributes: [ ]
-		 * }
-		 * ]
-		 * }
-		 * }); 
-		 */
+			const newProductsInCart = productsInCart.map(v => ({...v.dataValues, order_id: orderTable.id}));
 
-		return ({type: true, message: 'successful', data: result});
+			const orderDetails = await db.OrderDetails.bulkCreate(newProductsInCart, {transaction: t});
+
+			const deleteUserCart = await db.Carts.destroy({
+				where: {
+					user_id
+				}
+			}, {transaction: t});
+
+			await t.commit();
+
+			if (!deleteUserCart)
+				return ({ type: false, message: 'product not created' });
+	
+			return ({ type: true, message: 'successful', data: orderDetails });
+
+		}
+		catch (error) {
+			await t.rollback();
+			return ({type: false, message: error.message});
+		}
+
 	}
 
 }

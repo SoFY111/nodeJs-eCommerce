@@ -68,37 +68,37 @@ module.exports = {
 			updatedAt: new Date()
 		},
 		{
-			name: 'create_card',
+			name: 'create_cart',
 			createdAt: new Date(),
 			updatedAt: new Date()
 		},
 		{
-			name: 'get_user_card',
+			name: 'get_user_cart',
 			createdAt: new Date(),
 			updatedAt: new Date()
 		},
 		{
-			name: 'delete_product_on_card',
+			name: 'delete_product_on_cart',
 			createdAt: new Date(),
 			updatedAt: new Date()
 		},
 		{
-			name: 'update_card',
+			name: 'update_cart',
 			createdAt: new Date(),
 			updatedAt: new Date()
 		},
 		{
-			name: 'delete_card',
+			name: 'delete_cart',
 			createdAt: new Date(),
 			updatedAt: new Date()
 		},
 		{
-			name: 'get_all_cards',
+			name: 'get_all_carts',
 			createdAt: new Date(),
 			updatedAt: new Date()
 		},
 		{
-			name: 'add_product_to_card',
+			name: 'add_product_to_cart',
 			createdAt: new Date(),
 			updatedAt: new Date()
 		}

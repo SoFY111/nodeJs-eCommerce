@@ -11,13 +11,14 @@ module.exports = (sequelize, DataTypes) => {
 		 * The `models/index` file will call this method automatically.
 		 */
 		static associate(models) {
+			Orders.hasMany(models.OrderDetails, {foreignKey: 'order_id'});
 		}
 	
 	}
 	Orders.init({
 		user_id: DataTypes.INTEGER,
-		productIdsandCount: DataTypes.TEXT,
-		total_price: DataTypes.DOUBLE
+		total_price: DataTypes.DOUBLE,
+		isCompleted: DataTypes.BOOLEAN
 	}, {
 		sequelize,
 		modelName: 'Orders'
