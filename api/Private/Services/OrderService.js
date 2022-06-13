@@ -14,11 +14,11 @@ class OrderService{
 						'product_id',
 						'count',
 						'total_price',
-						[ Sequelize.col('Product.name', ), 'pr_name' ] //TODO 
+						[ Sequelize.fn('', Sequelize.col('OrderDetails.Product.name')), 'product_name' ]
 					],
 					include: {
 						model: db.Products,
-						attributes: [ 'name' ]
+						attributes: [  ]
 					}
 				}
 			});

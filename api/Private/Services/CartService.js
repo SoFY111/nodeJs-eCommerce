@@ -176,7 +176,7 @@ class CartService{
 					'total_price'
 				 ]
 			});	
-
+			
 			let totalPrice = 0;
 			for (let i = 0;i < productsInCart.length;i++) {
 				totalPrice = productsInCart[i].total_price + totalPrice;
