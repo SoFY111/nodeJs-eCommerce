@@ -2,7 +2,7 @@ import Joi from 'joi';
 
 class CartValidation{
 
-	static async addProductToCardValidation(body){
+	static async addProductToCartValidation(body){
 
 		try {
 			const schema = Joi.object().keys({

@@ -4,7 +4,7 @@ import db from '../../src/models';
 
 class CartService{
 
-	static async getUserCard(user_id){
+	static async getUserCart(user_id){
 
 		try {
 			const result = await db.Carts.findAll({
@@ -52,7 +52,7 @@ class CartService{
 		}
 	}
 
-	static async addProductToCard(user_id, body){
+	static async addProductToCart(user_id, body){
 		try {
 
 			const product = await db.Products.findOne({
@@ -105,7 +105,7 @@ class CartService{
 		}
 	}
 
-	static async deleteProductInCard(user_id, body){
+	static async deleteProductInCart(user_id, body){
 
 		try {
 
@@ -128,7 +128,7 @@ class CartService{
 			});
 			
 			if (!control)
-				return ({type: true, message: 'product is not in your card'});	
+				return ({type: true, message: 'product is not in your cart'});	
 
 			else {
 				let result;
@@ -161,7 +161,7 @@ class CartService{
 		}
 	}
 
-	static async coniformCard(user_id){
+	static async confirmCart(user_id){
 
 		const t = await db.sequelize.transaction();
 
