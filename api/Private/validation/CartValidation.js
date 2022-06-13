@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-class CardValidation{
+class CartValidation{
 
 	static async addProductToCardValidation(body){
 
@@ -20,4 +20,4 @@ class CardValidation{
 
 }
 
-export default CardValidation;
+export default CartValidation;

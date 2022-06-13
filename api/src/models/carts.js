@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
 		total_price: DataTypes.DOUBLE
 	}, {
 		sequelize,
-		modelName: 'Cards'
+		modelName: 'Carts'
 	});
 	return Carts;
 };

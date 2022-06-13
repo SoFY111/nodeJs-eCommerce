@@ -2,12 +2,12 @@ import { Sequelize } from 'sequelize';
 
 import db from '../../src/models';
 
-class CardService{
+class CartService{
 
 	static async getUserCard(user_id){
 
 		try {
-			const result = await db.Cards.findAll({
+			const result = await db.Carts.findAll({
 				where: {
 					user_id
 				},
@@ -67,14 +67,14 @@ class CardService{
 			if (!product)
 				return ({type: false, message: 'product not found'});
 
-			const control = await db.Cards.findOne({
+			const control = await db.Carts.findOne({
 				where: {
 					product_id: body.product_id
 				}
 			});
 			
 			if (!control){
-				const result = await db.Cards.create({
+				const result = await db.Carts.create({
 					user_id,
 					product_id: body.product_id,
 					count: body.count,
@@ -87,7 +87,7 @@ class CardService{
 
 			} 
 
-			const result = await db.Cards.update({
+			const result = await db.Carts.update({
 				count: (body.count + control.count),
 				total_price: ((product.price * body.count) + control.total_price)
 			}, {
@@ -121,7 +121,7 @@ class CardService{
 			if (!product)
 				return ({type: false, message: 'product not found'});
 
-			const control = await db.Cards.findOne({
+			const control = await db.Carts.findOne({
 				where: {
 					user_id: user_id,
 					product_id: body.product_id
@@ -134,14 +134,14 @@ class CardService{
 			else {
 				let result;
 				if (control.count - body.count <= 0) {
-					result = await db.Cards.destroy({
+					result = await db.Carts.destroy({
 						where: {
 							id: control.id
 						}
 					});	
 				}
 				else {
-					result = await db.Cards.update({
+					result = await db.Carts.update({
 						count: (control.count - body.count),
 						total_price: (control.total_price - (product.price * body.count))
 					}, {
@@ -162,6 +162,47 @@ class CardService{
 		}
 	}
 
+	static async coniformCard(user_id){
+
+		const result = await db.Users.findOne({
+			where: {
+				id: user_id,
+				isDeleted: false
+			},
+ 			attributes: [ 'username', 'email' ],
+			include: {
+				model: db.Carts,
+				attributes: [ 'product_id', 'count', 'total_price' ]
+			}
+		});
+
+		/*
+		 * const result = await db.Carts.findAll({
+		 * where: {
+		 * user_id
+		 * },
+		 * attributes: [ 
+		 * 'product_id',
+		 * [ Sequelize.col('Product.name'), 'product_name' ],
+		 * 'count',
+		 * 'total_price'
+		 * ],
+		 * include: {
+		 * model: db.Products,
+		 * attributes: [ ],
+		 * include: [
+		 * {
+		 *	 model: db.Brands,
+		 *	 attributes: [ ]
+		 * }
+		 * ]
+		 * }
+		 * }); 
+		 */
+
+		return ({type: true, message: 'successful', data: result});
+	}
+
 }
 
-export default CardService;
+export default CartService;
