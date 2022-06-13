@@ -72,7 +72,7 @@ class AuthService{
 			return {
 				type: true,
 				message: 'You are now logged in.',
-				token
+				token: `Bearer ${token}`
 			};	
 		}
 		catch (error) {

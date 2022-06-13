@@ -7,6 +7,7 @@ import CheckPermission from '../middlewares/checkPermission';
 const app = express();
 
 app.put('/add-product', CheckPermission.checkPermission('add_product_to_card'), CardController.addProductToCard);
+app.put('/delete-product', CheckPermission.checkPermission('add_product_to_card'), CardController.deleteProductToCard);
 app.get('/get-card', CardController.getUserCard);
 
 app.get('/health', CardController.health);
