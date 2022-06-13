@@ -110,7 +110,7 @@ class CartController{
 			const token = req.headers.authorization.split(' ')[1];
 			const tokenData = jwt.verify(token, JWT_SECRET);
 
-			const result = await CartService.coniformCart(tokenData.user_id);
+			const result = await CartService.confirmCart(tokenData.user_id);
 
 			if ( result.type )
 				res.status(200).json({type: true, message: result.message, data: result.data});
