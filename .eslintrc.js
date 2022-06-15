@@ -7,8 +7,7 @@ module.exports = {
 	'parserOptions': {
 		'sourceType': 'module'
 	},
-	'extends': [ 'eslint:recommended'
-	],
+	'extends': [ 'eslint:recommended' ],
 	'rules': {
 		'indent': [
 			'error',
@@ -129,7 +128,10 @@ module.exports = {
 			}
 		],
 		'no-var': [
-			'error'
+			'warn'
+		],
+		'no-unused-vars': [
+			'warn'
 		],
 		'no-dupe-keys': 0,
 		'no-useless-catch': 0,
