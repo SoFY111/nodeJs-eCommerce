@@ -7,11 +7,14 @@ import { JWT_SECRET } from '../../src/config/envKeys';
 class AuthService{
 
 	static async register(body){
+
+		const t = await db.sequelize.transaction();
+
 		try {
 
 			const password = md5(body.password);
 
-			const isEmailTaken = await db.Users.findOne({where: { email: body.email }});			
+			const isEmailTaken = await db.Users.findOne({where: { email: body.email }});		
 			if (isEmailTaken) return {
 				type: false,
 				message: 'Email is already taken.'
@@ -23,16 +26,23 @@ class AuthService{
 				message: 'Username is already taken'
 			};
 
-			const result = await db.Users.create({
+			const user = await db.Users.create({
 				username: body.username,
 				email: body.email,
 				password,
 				name: body.name,
 				surname: body.surname,
 				isDeleted: 0
-			});
+			}, {transction: t});
 
-			if (!result) {
+			const userRole = await db.UserRoles.create({
+				user_id: user.id,
+				role_id: 2
+			}, {transction: t});
+
+			await t.commit();
+
+			if (!userRole) {
 				return {
 					type: false,
 					message: 'user not created'
@@ -45,6 +55,7 @@ class AuthService{
 			};
 		}
 		catch (error) {
+			await t.rollback();
 			throw error;
 		}
 	}

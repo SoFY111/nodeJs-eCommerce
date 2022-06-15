@@ -68,6 +68,7 @@ class CartService{
 
 			const control = await db.Carts.findOne({
 				where: {
+					user_id,
 					product_id: body.product_id
 				}
 			});
