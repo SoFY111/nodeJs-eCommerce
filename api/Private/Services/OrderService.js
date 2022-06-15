@@ -3,7 +3,7 @@ import db from '../../src/models';
 
 class OrderService{
 
-	static async getOpenOrders(){
+	static async getInCompleteOrders(){
 		try {
 			const result = await db.Orders.findAll({
 				where: {

@@ -14,7 +14,7 @@ import { JWT_SECRET } from '../../src/config/envKeys';
 class CartController{
 
 	/**
-	 * @route GET /private/cart/get-Cart
+	 * @route GET /private/cart/get-cart
 	 * @group Cart
 	 * @summary Get user Cart
 	 * @returns {object} 200 - Success message

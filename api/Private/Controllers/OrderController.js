@@ -2,9 +2,16 @@ import OrderService from '../Services/OrderService';
 
 class OrderController{
 
-	static async getOpenOrders(req, res){
+	/**
+	 * @route GET /private/order/
+	 * @group Order
+	 * @summary Get InComplete Orders
+	 * @returns {object} 200 - Success message
+	 * @returns {Error} default - Unexpected error
+	 */
+	static async getInCompleteOrders(req, res){
 		try {
-			const result = await OrderService.getOpenOrders();
+			const result = await OrderService.getInCompleteOrders();
 
 			if (!result.type)
 				res.json({type: false, message: result.message});
@@ -16,6 +23,13 @@ class OrderController{
 		}
 	}
 
+	/**
+	 * @route GET /private/order/all
+	 * @group Order
+	 * @summary Get All Orders
+	 * @returns {object} 200 - Success message
+	 * @returns {Error} default - Unexpected error
+	 */
 	static async getAllOrders(req, res){
 		try {
 			const result = await OrderService.getAllOrders();
@@ -30,6 +44,13 @@ class OrderController{
 		}
 	}
 
+	/**
+	 * @route GET /private/order/completed
+	 * @group Order
+	 * @summary Get Completed Orders
+	 * @returns {object} 200 - Success message
+	 * @returns {Error} default - Unexpected error
+	 */
 	static async getCompletedOrders(req, res){
 		try {
 			const result = await OrderService.getCompletedOrders();
@@ -44,6 +65,14 @@ class OrderController{
 		}
 	}
 
+	/**
+	 * @route DELETE /private/order/{id}
+	 * @group Order
+	 * @summary Delete Order
+	 * @param {number} id.path
+	 * @returns {object} 200 - Success message
+	 * @returns {Error} default - Unexpected error
+	 */
 	static async deleteOrder(req, res){
 		try {
 			const result = await OrderService.deleteOrder(req.params.orderId);
@@ -58,6 +87,14 @@ class OrderController{
 		}
 	}
 
+	/**
+	 * @route PUT /private/order/{id}
+	 * @group Order
+	 * @summary Complete Order
+	 * @param {number} id.path
+	 * @returns {object} 200 - Success message
+	 * @returns {Error} default - Unexpected error
+	 */
 	static async completeOrder(req, res){
 		try {
 			const result = await OrderService.completeOrder(req.params.orderId);
