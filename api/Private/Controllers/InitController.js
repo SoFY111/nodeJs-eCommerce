@@ -8,7 +8,7 @@ class InitController{
 
 	static async getUserRole(req, res){
 		try {
-			const result = await InitService.getUserRole(req);
+			const result = await InitService.getUserRole(req.params.userId);
 
 			if (result.type) res.json({type: true, message: result.message, data: result.data});
 			else res.json({type: false, message: result.message});

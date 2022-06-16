@@ -1,12 +1,10 @@
 import db from '../../src/models';
 class InitService{
 	
-	static async getUserRole(req){
-		try {
-			const tokenData = req.userData;
-			
+	static async getUserRole(userId){
+		try {			
 			const userData = await db.Users.findOne({
-				where: {id: tokenData.id},
+				where: {id: userId},
 				attributes: [ 'username', 'email', 'name', 'surname' ],
 				include: {
 					model: db.Roles,
