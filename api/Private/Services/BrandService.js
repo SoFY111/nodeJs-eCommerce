@@ -76,8 +76,7 @@ class BrandService{
 				where: {
 					id: id
 				}
-			}
-			);
+			});
 
 			if (!result)
 				return ({ type: false, message: 'not updated.' });

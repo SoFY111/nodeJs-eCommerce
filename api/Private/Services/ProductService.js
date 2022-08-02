@@ -15,19 +15,22 @@ class ProductService{
 			});
 			if (!result)
 				return ({ type: false, message: 'product not created' });
-	
+			
 			return ({ type: true, message: 'successful', data: result });
 
 		}
 		catch (error) {
-			
+			console.log('ProductService -> catchError');
 			if (error.name === 'SequelizeForeignKeyConstraintError')
 				return ({ 
 					type: false, 
 					message: `product not created, foreign_key_error: ${error.parent.constraint}` 
 				}); 
-
-			throw error;
+			else
+				return ({ 
+					type: false, 
+					message: `product not created ${error.message}` 
+				});
 		}
 	}
 

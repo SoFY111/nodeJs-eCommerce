@@ -11,7 +11,6 @@ class CheckPermission{
 				
 				const token = req.headers.authorization.split(' ')[1];
 				const tokenData = await jwt.verify(token, JWT_SECRET);
-				res.status(200).json({type: false, message: 'success', data: token});
 
 				const userData = await db.Users.findOne({
 					where: {id: tokenData.user_id},

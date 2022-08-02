@@ -6,21 +6,21 @@ module.exports = {
 		password: DB_PASSWORD,
 		database: 'ecommerce_dev',
 		host: DB_HOST,
-		dialect: 'postgres'
+		dialect: 'mysql'
 	},
 	test: {
 		username: DB_USERNAME,
 		password: DB_PASSWORD,
 		database: 'ecommerce_test',
 		host: DB_HOST,
-		dialect: 'postgres'
+		dialect: 'mysql'
 	},
 	production: {
 		username: DB_USERNAME,
 		password: DB_PASSWORD,
 		database: 'ecommerce_prod',
 		host: DB_HOST,
-		dialect: 'postgres'
+		dialect: 'mysql'
 	}
 };
 

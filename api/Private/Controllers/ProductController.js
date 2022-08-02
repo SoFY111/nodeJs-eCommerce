@@ -26,19 +26,21 @@ class ProductController{
 			const validation = await ProductValidation.createProductValidation(req.body);
 
 			if (!validation.type)
-				res.status(400).json({type: false, message: validation.message});
+				return res.status(400).json({type: false, message: validation.message});
 
 			else {
 				const result = await ProductService.createProduct(req.body);
 
-				if (result.type) 
-					res.json({type: true, message: 'successful', data: result.data});
-				else
-					res.status(400).json({type: false, message: result.message});
+				if (result.type) {
+					return res.status(200).json({type: result.type, message: result.message, data: result.data});
+				}
+				else {
+					return res.status(400).json({type: false, message: result.message});
+				}
 			}	
 		}
 		catch (error) {
-			res.status(400).json({type: false, message: error.message});
+			return res.status(400).json({type: false, message: error.message});
 		}
 	}
 
@@ -54,12 +56,12 @@ class ProductController{
 			const result = await ProductService.getProducts();
 
 			if (result.type) 
-				res.status(200).json({type: true, message: result.message, data: result.data});
+				return res.status(200).json({type: true, message: result.message, data: result.data});
 			else
-				res.status(400).json({type: false, message: result.message});	
+				return res.status(400).json({type: false, message: result.message});	
 		}
 		catch (error) {
-			res.status(400).json({type: false, message: error.message});
+			return res.status(400).json({type: false, message: error.message});
 		}
 	}
 

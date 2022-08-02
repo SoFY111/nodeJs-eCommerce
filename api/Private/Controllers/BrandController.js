@@ -21,17 +21,16 @@ class BrandController{
 			const validation = await BrandValidation.createBrandValidation(req.body); 
 
 			if (!validation.type)
-				res.status(400).json({type: false, message: validation.message});	
+				return res.status(400).json({type: false, message: validation.message});	
 
 			const result = await BrandService.createBrand(req.body);
       
 			if (result.type)
-				res.json({type: true, message: 'successful', data: result.data});
-			else
-				res.status(400).json({type: false, message: result.message});
+				return res.status(200).json({type: true, message: 'successful', data: result.data});
+			return res.status(400).json({type: false, message: result.message});
 		}
 		catch (error) {
-			res.status(400).json({type: false, message: error.message});
+			return res.status(400).json({type: false, message: error.message});
 		}
 	}
 
