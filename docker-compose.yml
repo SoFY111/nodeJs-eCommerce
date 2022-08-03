@@ -43,4 +43,3 @@ services:
 networks:
   mysqlDb:
     driver: bridge
-    external: true
