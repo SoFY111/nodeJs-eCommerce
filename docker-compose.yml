@@ -42,5 +42,4 @@ services:
 
 networks:
   mysqlDb:
-    external:
-      name: mysqlDb
+    driver: mysqlDb
