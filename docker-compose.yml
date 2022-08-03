@@ -42,9 +42,9 @@ services:
         delay: 5s
         max_attempts: 3
     networks:
-      - eCommerceNetwork
+      - mysqlDb
 
 volumes:
   eCommerceVolume:
 networks:
-  eCommerceNetwork:
+  mysqlDb:
