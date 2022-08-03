@@ -40,6 +40,6 @@ services:
       - mysqlDb
 
 networks:
-  mysqlDb:
+  outside:
     external:
       name: mysqlDb
