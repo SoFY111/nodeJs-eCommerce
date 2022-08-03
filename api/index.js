@@ -28,5 +28,5 @@ app.use('/private', privateRoutes);
 swaggerGenerator(swaggerOptions);
 
 app.listen(PORT, () => {
-	success({ message: `SERVER IS RUNNING ONN ${PORT}`, badge: true });
+	success({ message: `SERVER IS RUNNING ON ${PORT}`, badge: true });
 });
