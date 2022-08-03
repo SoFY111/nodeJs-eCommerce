@@ -41,5 +41,3 @@ services:
 
 networks:
   mysqlDb:
-    name: mysqlDb
-    driver: bridge
