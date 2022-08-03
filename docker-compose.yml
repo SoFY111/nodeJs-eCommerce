@@ -33,6 +33,7 @@ services:
       - s_mysqldb_ecommerce
     container_name: cECommerce_j
     build: .
+    restart: always
     ports:
       - 5000:5000
     command: /bin/sh -c "sequelize-cli db:migrate && npm start"
