@@ -36,8 +36,6 @@ services:
     ports:
       - 5000:5000
     command: /bin/sh -c "sequelize-cli db:migrate && npm start"
-    networks:
-      - default
 
 networks:
   default:
