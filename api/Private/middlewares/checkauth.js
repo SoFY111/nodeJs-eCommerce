@@ -11,6 +11,6 @@ module.exports = async (req, res, next) => {
 	}
 	catch (error) {
 		console.log(error.message);
-		res.json({type: false, message: 'unauthorized'});
+		res.json({type: false, message: 'unauthorizedd'});
 	}
 };
