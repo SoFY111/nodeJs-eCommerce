@@ -48,3 +48,5 @@ volumes:
   eCommerceVolume:
 networks:
   mysqlDb:
+    name: mysqlDb
+    driver: bridge
