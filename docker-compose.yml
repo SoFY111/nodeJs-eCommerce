@@ -34,7 +34,11 @@ services:
     ports:
       - 5000:5000
     command: /bin/sh -c "sequelize-cli db:migrate && npm start"
-    restart: always
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
     depends_on:
       - s_mysqldb_ecommerce
     networks:
