@@ -36,16 +36,9 @@ services:
     ports:
       - 5000:5000
     command: /bin/sh -c "sequelize-cli db:migrate"
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
     networks:
       - mysqlDb
 
-volumes:
-  eCommerceVolume:
 networks:
   mysqlDb:
     name: mysqlDb
