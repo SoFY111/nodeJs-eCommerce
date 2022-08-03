@@ -1,7 +1,7 @@
 import express from 'express';
 import fs from 'fs';
 
-import checkAuth from './middlewares/checkAuth';
+import checkAuth from './middlewares/auth';
 
 const app = express();
 app.use(checkAuth);
