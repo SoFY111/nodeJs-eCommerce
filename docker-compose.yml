@@ -32,12 +32,15 @@ services:
     # depends_on:
     #   - s_mysqldb_ecommerce
     container_name: cECommerce_j
+    restart: on-failure
     build: .
     ports:
       - 5000:5000
     command: /bin/sh -c "sequelize-cli db:migrate && npm start"
+    networks:
+      - mysqlDb
 
 networks:
-  default:
+  mysqlDb:
     external:
       name: mysqlDb
