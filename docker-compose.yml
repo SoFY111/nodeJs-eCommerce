@@ -37,7 +37,7 @@ services:
       - 5000:5000
     command: /bin/sh -c "sequelize-cli db:migrate && npm start"
     networks:
-      - mysqlDb
+      - default
 
 networks:
   default:
