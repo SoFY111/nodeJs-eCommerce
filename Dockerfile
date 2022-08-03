@@ -11,4 +11,4 @@ COPY . /home/src/app
 
 EXPOSE 5000
 
-CMD ["npm", "start"]
+# CMD ["npm", "start"]
