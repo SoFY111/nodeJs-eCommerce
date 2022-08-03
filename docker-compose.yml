@@ -37,8 +37,11 @@ services:
     ports:
       - 5000:5000
     command: /bin/sh -c "sequelize-cli db:migrate && npm start"
+    hostname: ecommerceapp
     networks:
       - mysqlDb
 
 networks:
   mysqlDb:
+    external: true
+    driver: bridge
