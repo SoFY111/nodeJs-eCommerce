@@ -29,6 +29,8 @@ services:
       - eCommerceNetwork
 
   s_ecommerce:
+    depends_on:
+      - s_mysqldb_ecommerce
     container_name: cECommerce_j
     build: .
     ports:
@@ -39,8 +41,6 @@ services:
         condition: on-failure
         delay: 5s
         max_attempts: 3
-    depends_on:
-      - s_mysqldb_ecommerce
     networks:
       - eCommerceNetwork
 

@@ -6,7 +6,6 @@ module.exports = {
 		password: DB_PASSWORD,
 		database: 'ecommerce_dev',
 		host: DB_HOST,
-		port: 9094,
 		dialect: 'mysql'
 	},
 	test: {
