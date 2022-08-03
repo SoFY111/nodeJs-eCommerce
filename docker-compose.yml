@@ -31,11 +31,15 @@ services:
   s_ecommerce:
     container_name: cECommerce_j
     build: .
+    volumes:
+      - eCommerceVolume:/var/lib/mysql
     ports:
       - 5000:5000
     command: /bin/sh -c "npm start"
     networks:
       - eCommerceNetwork
 
+volumes:
+  eCommerceVolume:
 networks:
   eCommerceNetwork:
