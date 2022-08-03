@@ -29,6 +29,7 @@ services:
   #     - eCommerceNetwork
 
   s_ecommerce:
+    hostname: ecommerceapp
     # depends_on:
     #   - s_mysqldb_ecommerce
     container_name: cECommerce_j
@@ -37,7 +38,6 @@ services:
     ports:
       - 5000:5000
     command: /bin/sh -c "sequelize-cli db:migrate && npm start"
-    hostname: ecommerceapp
     networks:
       - mysqlDb
 
